@@ -1,0 +1,18 @@
+<div class="container">
+
+  <table class="table table-bordered mt-5">
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>CNE</th>
+      <th>NOM</th>
+      <th>PRENOM</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr app-student-row *ngFor="let student of students" [student]="student"></tr>
+
+    </tbody>
+  </table>
+
+</div>
