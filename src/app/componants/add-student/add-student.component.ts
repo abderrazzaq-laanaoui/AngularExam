@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AppService} from '../../services/app.service';
-import {Student} from '../../models/Student';
+import {Joke} from '../../models/Joke';
 
 @Component({
-  selector: 'app-add-student',
-  templateUrl: './add-student.component.html',
-  styleUrls: ['./add-student.component.css']
+  selector: 'app-add-Joke',
+  templateUrl: './add-Joke.component.html',
+  styleUrls: ['./add-Joke.component.css']
 })
-export class AddStudentComponent implements OnInit {
+export class AddJokeComponent implements OnInit {
   public form:FormGroup;
 
   constructor(private service:AppService) { }
@@ -25,7 +25,7 @@ export class AddStudentComponent implements OnInit {
     let cne = this.form.getRawValue().cne;
     let fname = this.form.getRawValue().fname;
     let lname = this.form.getRawValue().lname;
-    this.service.addStudent(new Student(fname,lname,cne));
+    this.service.addJoke(new Joke(fname,lname,cne));
     this.form.reset();
 
   }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Student} from '../models/Student';
+import {Joke} from '../models/Joke';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 
@@ -7,28 +7,32 @@ import {Router} from '@angular/router';
   providedIn: 'root'
 })
 export class AppService {
-  private _students: Array<Student>;
-  private url = "http://localhost:3000/students";
+
+  private _Jokes: Array<Joke>;
+  private url = "https://institutjamai.com/exam/allJokes";
+  private randUrl = "https://api.chucknorris.io/jokes/random";
 
 
-  get students(): Array<Student> {
-    return this._students;
+
+  get Jokes(): Array<Joke> {
+    return this._Jokes;
   }
 
   constructor(private httpC:HttpClient,private router: Router) {
-    this._students=new Array<Student>();
+    this._Jokes=new Array<Joke>();
 
-    this.httpC.get<Array<Student>>(this.url).subscribe(
-      (res)=>{ this.students.push(...res) },
+    this.httpC.get<Array<Joke>>(this.url).subscribe(
+      (res)=>{ this.Jokes.push(...res) },
       (err)=>{
         console.log(err);
         alert("ERROR!")}
     )
   }
-  public addStudent(student:Student){
 
-    this.httpC.post<Student>(this.url,student).subscribe(
-      (res)=> { this.students.push(res)
+  public addJoke(Joke:Joke){
+
+    this.httpC.post<Joke>(this.url,Joke).subscribe(
+      (res)=> { this.Jokes.push(res)
         this.router.navigateByUrl('/list');
       },
       ()=> {
@@ -36,4 +40,15 @@ export class AppService {
       }
     )
   }
+  public addRandJoke(){
+    this.httpC.get<{value:string}>(this.randUrl).subscribe(
+      (res)=>{
+        let message = res.value;
+        console.log(message);
+      },
+      (err)=>{
+        alert("ERROR!")}
+    )
+
+}
 }
